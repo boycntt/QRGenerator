@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Button,
   View,
 } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
@@ -19,6 +20,13 @@ export default class HomeScreen extends Component {
     };
 
   }
+
+  getDataURL() {
+    this.svg.toDataURL((dataURL)=>{
+      console.log(dataURL);
+    });
+  }
+
   componentDidMount() {
     this.inputs.focus();
   }
@@ -40,6 +48,12 @@ export default class HomeScreen extends Component {
           size={350}
           logo={logoFromFile}
           logoSize={30}
+          getRef={(c) => (this.svg = c)}
+        />
+        <Button title={"Save"}
+        onPress={() => {
+          this.getDataURL();
+        }}
         />
       </View>
     );
